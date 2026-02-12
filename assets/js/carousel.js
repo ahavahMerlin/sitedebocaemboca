@@ -15,7 +15,7 @@ for (let i = startImage; i <= endImage; i++) {
     
     const img = document.createElement('img');
     img.src = `certificados/${i}.png`; // Nome da pasta corrigido!
-    img.alt = `Certificados ${i}`;
+   img.alt = `Certificados de Qualificação Profissional- Edison Riella ${i} - DeBocaEmBoca`;
     img.style.width = '100%';
     img.style.display = 'block';
     
