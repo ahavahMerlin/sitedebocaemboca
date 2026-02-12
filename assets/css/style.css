@@ -1,61 +1,58 @@
-/* Container principal do carrossel */
+/* O QUADRO ONDE A FOTO APARECE */
 .carousel {
   position: relative;
   width: 100%;
-  max-width: 800px; /* Ajuste conforme desejar */
-  margin: 40px auto;
-  overflow: hidden; /* Esconde as imagens que estão fora da tela */
+  max-width: 600px; 
+  margin: 20px auto;
+  overflow: hidden !important; /* Esconde o que está fora do quadro */
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  background: #fff;
 }
 
 .carousel-track-container {
   width: 100%;
-  overflow: hidden;
+  overflow: hidden !important;
 }
 
+/* A LINHA DE FOTOS (TREM) */
 .carousel-track {
-  display: flex;
+  display: flex !important; /* FORÇA FICAR LADO A LADO */
+  flex-direction: row !important;
   transition: transform 0.5s ease-in-out;
   padding: 0;
   margin: 0;
   list-style: none;
 }
 
+/* CADA VAGÃO DO TREM */
 .carousel-track li {
-  min-width: 100%; /* Cada slide ocupa o lugar inteiro */
+  min-width: 100% !important;
+  flex: 0 0 100% !important;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 .carousel-track img {
   width: 100%;
-  max-width: 600px; /* Tamanho máximo da imagem */
   height: auto;
   max-height: 400px;
-  object-fit: contain; /* Não corta a imagem, mantém a proporção */
-  border-radius: 15px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2); /* Sombra igual ao exemplo */
-  background: #fff;
+  object-fit: contain;
 }
 
-/* Botões */
+/* BOTÕES EM CIMA DA FOTO */
 .carousel-btn {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(230, 74, 25, 0.8);
   color: white;
   border: none;
-  font-size: 24px;
-  padding: 15px;
+  font-size: 20px;
+  padding: 10px 15px;
   cursor: pointer;
   border-radius: 50%;
-  z-index: 10;
-  transition: 0.3s;
-}
-
-.carousel-btn:hover {
-  background: var(--primary-color);
+  z-index: 999;
 }
 
 .carousel-btn.prev { left: 10px; }
