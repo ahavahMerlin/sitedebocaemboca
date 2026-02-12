@@ -53,3 +53,16 @@
     height: 200px;
   }
 }
+.carousel-track-container {
+    overflow: hidden;
+    width: 100%; /* Garante que o container limite o tamanho */
+    position: relative;
+}
+
+.carousel-track {
+    display: flex;
+    width: 100%; /* Fundamental para o cálculo do JS */
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
