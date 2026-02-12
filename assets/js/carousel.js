@@ -6,7 +6,7 @@ const startImage = 2;
 const endImage = 44;
 let currentIndex = 0;
 
-// 1. Criar as imagens
+// 1. Criar as imagens dentro da estrutura correta
 for (let i = startImage; i <= endImage; i++) {
     const li = document.createElement('li');
     const img = document.createElement('img');
@@ -16,34 +16,39 @@ for (let i = startImage; i <= endImage; i++) {
     track.appendChild(li);
 }
 
-// 2. Função que move o carrossel
 function updateCarousel() {
-    // Calculamos a largura do contêiner no momento exato da troca
-    const slideWidth = document.querySelector('.carousel-track-container').offsetWidth;
+    const slideWidth = track.querySelector('li').offsetWidth;
     track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
 
-// 3. Botões
+// Botão Próximo
 nextBtn.addEventListener('click', () => {
-    const totalSlides = endImage - startImage + 1;
-    currentIndex = (currentIndex + 1) % totalSlides;
+    const slides = track.querySelectorAll('li');
+    currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel();
 });
 
+// Botão Anterior
 prevBtn.addEventListener('click', () => {
-    const totalSlides = endImage - startImage + 1;
-    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+    const slides = track.querySelectorAll('li');
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     updateCarousel();
 });
 
-// 4. Troca automática (Auto-play)
-setInterval(() => {
-    const totalSlides = endImage - startImage + 1;
-    currentIndex = (currentIndex + 1) % totalSlides;
+// Auto-play (Troca sozinho igual ao exemplo)
+let autoPlay = setInterval(() => {
+    const slides = track.querySelectorAll('li');
+    currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel();
-}, 4000); // Troca a cada 4 segundos
+}, 4000);
 
-// 5. Ajuste caso o usuário mude o tamanho da janela (ou gire o celular)
+// Para o auto-play quando o usuário interage
+const stopAutoPlay = () => clearInterval(autoPlay);
+nextBtn.addEventListener('mousedown', stopAutoPlay);
+prevBtn.addEventListener('mousedown', stopAutoPlay);
+
+// Ajuste de redimensionamento
 window.addEventListener('resize', updateCarousel);
-// Força o alinhamento assim que a página carrega
+
+// Inicializa no carregamento
 window.addEventListener('load', updateCarousel);
