@@ -1,0 +1,9 @@
+@media (max-width: 768px) {
+  .carousel-track img {
+    height: 260px;
+  }
+
+  .carousel-btn {
+    font-size: 22px;
+  }
+}
