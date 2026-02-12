@@ -2,60 +2,48 @@ const track = document.querySelector('.carousel-track');
 const prevBtn = document.querySelector('.carousel-btn.prev');
 const nextBtn = document.querySelector('.carousel-btn.next');
 
-// Configurações: imagens de 2.png até 44.png
 const startImage = 2;
 const endImage = 44;
 let currentIndex = 0;
 
-// 1. Criar imagens dinamicamente
+// 1. Criar as imagens
 for (let i = startImage; i <= endImage; i++) {
     const li = document.createElement('li');
-    li.style.minWidth = '100%'; // Garante que o slide ocupe 100% do espaço
-    li.style.flex = '0 0 100%'; // Evita que os slides encolham
-    
     const img = document.createElement('img');
-    img.src = `certificados/${i}.png`; // Nome da pasta corrigido!
+    img.src = `certificados/${i}.png`;
    img.alt = `Certificados de Qualificação Profissional- Edison Riella ${i} - DeBocaEmBoca`;
-    img.style.width = '100%';
-    img.style.display = 'block';
-    
-    li.appendChild(img);
+   li.appendChild(img);
     track.appendChild(li);
 }
 
-// 2. Função para mover o carrossel
+// 2. Função que move o carrossel
 function updateCarousel() {
-    const container = document.querySelector('.carousel-track-container');
-    if (container) {
-        const slideWidth = container.offsetWidth;
-        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
-    }
+    // Calculamos a largura do contêiner no momento exato da troca
+    const slideWidth = document.querySelector('.carousel-track-container').offsetWidth;
+    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
 
-// 3. Botões de Navegação
+// 3. Botões
 nextBtn.addEventListener('click', () => {
-    const slides = track.querySelectorAll('li');
-    currentIndex = (currentIndex + 1) % slides.length;
+    const totalSlides = endImage - startImage + 1;
+    currentIndex = (currentIndex + 1) % totalSlides;
     updateCarousel();
 });
 
 prevBtn.addEventListener('click', () => {
-    const slides = track.querySelectorAll('li');
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    const totalSlides = endImage - startImage + 1;
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
     updateCarousel();
 });
 
-// 4. Autoplay e Ajustes de Janela
+// 4. Troca automática (Auto-play)
+setInterval(() => {
+    const totalSlides = endImage - startImage + 1;
+    currentIndex = (currentIndex + 1) % totalSlides;
+    updateCarousel();
+}, 4000); // Troca a cada 4 segundos
+
+// 5. Ajuste caso o usuário mude o tamanho da janela (ou gire o celular)
 window.addEventListener('resize', updateCarousel);
-
-// Executa após o carregamento total para garantir que o tamanho do container exista
-window.addEventListener('load', () => {
-    updateCarousel();
-    setInterval(() => {
-        const slides = track.querySelectorAll('li');
-        if (slides.length > 0) {
-            currentIndex = (currentIndex + 1) % slides.length;
-            updateCarousel();
-        }
-    }, 5000);
-});
+// Força o alinhamento assim que a página carrega
+window.addEventListener('load', updateCarousel);
