@@ -95,3 +95,81 @@ header h2 { margin-left: 15px; }
     .carousel-track li { height: 250px; }
     header { flex-direction: column; text-align: center; }
 }
+/* CARROSSEL IGUAL CONSULTORIA-MAISAUDE */
+.cert-carousel {
+    position: relative;
+    max-width: 600px;
+    height: 300px;
+    margin: 40px auto;
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.cert-slides {
+    display: flex;
+    height: 100%;
+    transition: transform 0.6s ease;
+    position: relative;
+}
+
+.cert-slide {
+    min-width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.cert-slide img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.cert-prev, .cert-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(230,74,25,0.9);
+    color: white;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s;
+}
+
+.cert-prev { left: 15px; }
+.cert-next { right: 15px; }
+.cert-prev:hover, .cert-next:hover { background: #e64a19; transform: translateY(-50%) scale(1.1); }
+
+.cert-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.cert-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: #ddd;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.cert-dot.active { background: #e64a19; }
+
+@media (max-width: 600px) {
+    .cert-carousel { height: 250px; margin: 30px auto; }
+}
