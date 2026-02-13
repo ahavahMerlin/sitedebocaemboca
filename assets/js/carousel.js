@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const dotsContainer = document.querySelector('.cert-dots');
     
     let currentIndex = 0;
-    const totalSlides = 44; // 2.png até 44.png
+    const totalSlides = 44; // 1.png até 44.png
     
     // CRIAR SLIDES
     for(let i = 1; i <= 44; i++) {
