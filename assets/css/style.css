@@ -1,59 +1,61 @@
-/* O QUADRO ONDE A FOTO APARECE */
+/* O QUADRO (A JANELA) */
 .carousel {
-  position: relative;
-  width: 100%;
-  max-width: 600px; 
-  margin: 20px auto;
-  overflow: hidden !important; /* Esconde o que está fora do quadro */
-  border: 2px solid #ddd;
-  border-radius: 15px;
-  background: #fff;
+    position: relative;
+    width: 100%;
+    max-width: 600px;
+    margin: 30px auto;
+    overflow: hidden !important; /* Esconde o que está fora */
+    border-radius: 15px;
+    background: #fff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
 .carousel-track-container {
-  width: 100%;
-  overflow: hidden !important;
+    width: 100%;
+    overflow: hidden !important;
 }
 
-/* A LINHA DE FOTOS (TREM) */
+/* O TRILHO (ONDE AS FOTOS FICAM LADO A LADO) */
 .carousel-track {
-  display: flex !important; /* FORÇA FICAR LADO A LADO */
-  flex-direction: row !important;
-  transition: transform 0.5s ease-in-out;
-  padding: 0;
-  margin: 0;
-  list-style: none;
+    display: flex !important; /* ISSO OBRIGA A FICAR LADO A LADO */
+    flex-direction: row !important;
+    flex-wrap: nowrap !important; /* NÃO DEIXA QUEBRAR LINHA */
+    transition: transform 0.5s ease-in-out;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 100%;
 }
 
-/* CADA VAGÃO DO TREM */
+/* CADA SLIDE */
 .carousel-track li {
-  min-width: 100% !important;
-  flex: 0 0 100% !important;
-  display: flex;
-  justify-content: center;
+    min-width: 100% !important;
+    width: 100% !important;
+    flex-shrink: 0 !important; /* NÃO DEIXA A FOTO AMASSAR */
+    display: flex;
+    justify-content: center;
 }
 
 .carousel-track img {
-  width: 100%;
-  height: auto;
-  max-height: 400px;
-  object-fit: contain;
+    width: 100%;
+    height: auto;
+    max-height: 400px;
+    object-fit: contain;
 }
 
-/* BOTÕES EM CIMA DA FOTO */
+/* BOTÕES */
 .carousel-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(230, 74, 25, 0.8);
-  color: white;
-  border: none;
-  font-size: 20px;
-  padding: 10px 15px;
-  cursor: pointer;
-  border-radius: 50%;
-  z-index: 999;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(230, 74, 25, 0.8);
+    color: white;
+    border: none;
+    font-size: 24px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    z-index: 100;
 }
-
 .carousel-btn.prev { left: 10px; }
 .carousel-btn.next { right: 10px; }
