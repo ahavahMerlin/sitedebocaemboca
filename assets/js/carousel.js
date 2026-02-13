@@ -1,53 +1,50 @@
 const track = document.querySelector('.carousel-track');
 const prevBtn = document.querySelector('.carousel-btn.prev');
 const nextBtn = document.querySelector('.carousel-btn.next');
+const container = document.querySelector('.carousel-track-container');
 
-const startImage = 2;
-const endImage = 44;
 let currentIndex = 0;
+let slideWidth = 0;
 
-// 1. Criar as imagens
-track.innerHTML = ''; // Limpa antes
-for (let i = startImage; i <= endImage; i++) {
+// Cria imagens (2.png até 44.png)
+track.innerHTML = '';
+for (let i = 2; i <= 44; i++) {
     const li = document.createElement('li');
     const img = document.createElement('img');
     img.src = `certificados/${i}.png`;
    img.alt = `Certificados de Qualificação Profissional- Edison Riella ${i} - DeBocaEmBoca`;
-    img.onload = () => console.log(`Carregou ${i}.png`); // Debug
-   li.appendChild(img);
+   img.onerror = () => console.log(`Erro carregando ${i}.png`);
+    li.appendChild(img);
     track.appendChild(li);
 }
 
-// 2. Função de movimento com segurança
-function updateCarousel() {
-    const container = document.querySelector('.carousel-track-container');
+function initCarousel() {
     if (container) {
-        const slideWidth = container.clientWidth;
+        slideWidth = container.offsetWidth;
+        updateCarousel();
+    }
+}
+
+function updateCarousel() {
+    if (track && slideWidth) {
         track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
     }
 }
 
-// 3. Botões
+// Botões
 nextBtn.addEventListener('click', () => {
-    const slides = track.querySelectorAll('li');
-    currentIndex = (currentIndex + 1) % slides.length;
+    currentIndex = (currentIndex + 1) % track.children.length;
     updateCarousel();
 });
 
 prevBtn.addEventListener('click', () => {
-    const slides = track.querySelectorAll('li');
-    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+    currentIndex = (currentIndex - 1 + track.children.length) % track.children.length;
     updateCarousel();
 });
 
-// 4. Forçar o carregamento correto
-window.addEventListener('load', () => {
+// Auto e init
+window.addEventListener('load', initCarousel);
+setInterval(() => {
+    currentIndex = (currentIndex + 1) % track.children.length;
     updateCarousel();
-    setInterval(() => {
-        const slides = track.querySelectorAll('li');
-        currentIndex = (currentIndex + 1) % slides.length;
-        updateCarousel();
-    }, 4000);
-});
-
-window.addEventListener('resize', updateCarousel);
+}, 4000);
