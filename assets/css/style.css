@@ -1,10 +1,10 @@
-/* O QUADRO (A JANELA) */
+/* CARROSSEL CORRIGIDO - IMAGENS LADO A LADO */
 .carousel {
     position: relative;
     width: 100%;
     max-width: 600px;
     margin: 30px auto;
-    overflow: hidden !important; /* Esconde o que está fora */
+    overflow: hidden;
     border-radius: 15px;
     background: #fff;
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
@@ -12,50 +12,59 @@
 
 .carousel-track-container {
     width: 100%;
-    overflow: hidden !important;
+    overflow: hidden;
+    position: relative;
 }
 
-/* O TRILHO (ONDE AS FOTOS FICAM LADO A LADO) */
 .carousel-track {
-    display: flex !important; /* ISSO OBRIGA A FICAR LADO A LADO */
+    display: flex !important;
     flex-direction: row !important;
-    flex-wrap: nowrap !important; /* NÃO DEIXA QUEBRAR LINHA */
-    transition: transform 0.5s ease-in-out;
+    flex-wrap: nowrap !important;
+    transition: transform 0.5s ease-in-out !important;
     margin: 0;
     padding: 0;
     list-style: none;
-    width: 100%;
+    width: max-content; /* IMPORTANTE: permite largura total */
 }
 
-/* CADA SLIDE */
 .carousel-track li {
     min-width: 100% !important;
     width: 100% !important;
-    flex-shrink: 0 !important; /* NÃO DEIXA A FOTO AMASSAR */
+    flex-shrink: 0 !important;
     display: flex;
     justify-content: center;
+    height: 350px; /* Altura fixa para uniformidade */
+    align-items: center;
 }
 
 .carousel-track img {
-    width: 100%;
-    height: auto;
-    max-height: 400px;
+    width: 90%;
+    height: 90%;
     object-fit: contain;
+    max-height: 350px;
 }
 
-/* BOTÕES */
 .carousel-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(230, 74, 25, 0.8);
+    background: rgba(230, 74, 25, 0.9);
     color: white;
     border: none;
     font-size: 24px;
-    padding: 10px 15px;
+    padding: 12px 18px;
     cursor: pointer;
     border-radius: 50%;
     z-index: 100;
+    transition: background 0.3s;
 }
-.carousel-btn.prev { left: 10px; }
-.carousel-btn.next { right: 10px; }
+.carousel-btn:hover { background: rgba(230, 74, 25, 1); }
+.carousel-btn.prev { left: 15px; }
+.carousel-btn.next { right: 15px; }
+
+/* RESPONSIVO */
+@media (max-width: 600px) {
+    .carousel { margin: 20px auto; }
+    .carousel-track li { height: 250px; }
+    .carousel-track img { max-height: 250px; }
+}
