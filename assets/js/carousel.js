@@ -1,3 +1,4 @@
+const track = document.querySelector('.carousel-track');
 const prevBtn = document.querySelector('.carousel-btn.prev');
 const nextBtn = document.querySelector('.carousel-btn.next');
 
@@ -5,9 +6,8 @@ const startImage = 2;
 const endImage = 44;
 let currentIndex = 0;
 
-// Limpa o track antes de começar (evita duplicados)
-track.innerHTML = '';
-
+// 1. Criar as imagens
+track.innerHTML = ''; // Limpa antes
 for (let i = startImage; i <= endImage; i++) {
     const li = document.createElement('li');
     const img = document.createElement('img');
@@ -17,30 +17,36 @@ for (let i = startImage; i <= endImage; i++) {
     track.appendChild(li);
 }
 
+// 2. Função de movimento com segurança
 function updateCarousel() {
-    const slideWidth = track.parentElement.offsetWidth;
-    track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    const container = document.querySelector('.carousel-track-container');
+    if (container) {
+        const slideWidth = container.clientWidth;
+        track.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+    }
 }
 
+// 3. Botões
 nextBtn.addEventListener('click', () => {
-    const total = endImage - startImage + 1;
-    currentIndex = (currentIndex + 1) % total;
+    const slides = track.querySelectorAll('li');
+    currentIndex = (currentIndex + 1) % slides.length;
     updateCarousel();
 });
 
 prevBtn.addEventListener('click', () => {
-    const total = endImage - startImage + 1;
-    currentIndex = (currentIndex - 1 + total) % total;
+    const slides = track.querySelectorAll('li');
+    currentIndex = (currentIndex - 1 + slides.length) % slides.length;
     updateCarousel();
 });
 
-// Força o ajuste inicial após um pequeno delay para o navegador processar o CSS
-setTimeout(updateCarousel, 500);
+// 4. Forçar o carregamento correto
+window.addEventListener('load', () => {
+    updateCarousel();
+    setInterval(() => {
+        const slides = track.querySelectorAll('li');
+        currentIndex = (currentIndex + 1) % slides.length;
+        updateCarousel();
+    }, 4000);
+});
 
 window.addEventListener('resize', updateCarousel);
-
-setInterval(() => {
-    const total = endImage - startImage + 1;
-    currentIndex = (currentIndex + 1) % total;
-    updateCarousel();
-}, 4000);
