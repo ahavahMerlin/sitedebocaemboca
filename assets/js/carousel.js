@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
     setInterval(() => {
         currentIndex = (currentIndex + 1) % (track.children.length);
         updateCarousel();
-    }, 8000); // ← MUDOU DE 4000 PARA 8000 (8 SEGUNDOS)
+    }, 16000); // ← MUDOU DE 4000 PARA 8000 (8 SEGUNDOS)
     
     // INICIAR
     window.addEventListener('load', init);
